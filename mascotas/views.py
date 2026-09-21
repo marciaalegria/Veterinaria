@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect
 from .forms import MascotaForm
 
+from .models import Mascota
+
 
 def registrar_mascota(request):
     if request.method == 'POST':
@@ -15,3 +17,9 @@ def registrar_mascota(request):
     return render(request, 'mascotas/registrar.html', {'form': form})
 
 # Create your views here.
+
+def listar_mascotas(request):
+    mascotas = Mascota.objects.all()
+    return render(request, 'mascotas/listar.html', {
+        'mascotas': mascotas
+    })
