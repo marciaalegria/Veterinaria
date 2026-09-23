@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,49 +10,200 @@
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
+
+    <style>
+        body {
+    background-image:
+        linear-gradient(
+            rgba(243, 246, 242, 0.15),
+            rgba(243, 246, 242, 0.15)
+        ),
+        url("{% static 'mascotas/img/fondo_form.png' %}");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #34483c;
+}
+
+        /* Barra de navegación */
+        .navbar {
+            background-color: #247a58;
+        }
+
+        .navbar-brand {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* Tarjeta del formulario */
+        .form-card {
+            max-width: 650px;
+            margin: 50px auto;
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            background-color: #247a58;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border: none;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .card-header p {
+            margin: 8px 0 0;
+            color: #e3f1e8;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        /* Campos generados por Django con form.as_p */
+        form p {
+            margin-bottom: 20px;
+        }
+
+        form p label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #34483c;
+        }
+
+        form p input,
+        form p select,
+        form p textarea {
+            display: block;
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ced9d0;
+            border-radius: 8px;
+            background-color: #fff;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        /* Efecto al seleccionar un campo */
+        form p input:focus,
+        form p select:focus,
+        form p textarea:focus {
+            border-color: #247a58;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(36, 122, 88, 0.15);
+        }
+
+        /* Mensajes de validación de Django */
+        .errorlist {
+            color: #dc3545;
+            font-size: 0.9rem;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        /* Botón registrar */
+        .btn-registrar {
+            background-color: #247a58;
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-registrar:hover {
+            background-color: #195c41;
+            color: white;
+        }
+
+        /* Botón volver */
+        .btn-volver {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            padding: 12px;
+            color: #247a58;
+            border: 1px solid #247a58;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-volver:hover {
+            background-color: #e7f1e9;
+            color: #195c41;
+        }
+
+        /* Ajustes para celulares */
+        @media (max-width: 576px) {
+            .form-card {
+                margin: 25px 10px;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-light">
+<body>
 
-    <nav class="navbar navbar-dark bg-success">
+    <!-- Barra superior -->
+    <nav class="navbar navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'inicio' %}">
                 🐾 Veterinaria
             </a>
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-7 col-lg-6">
+    <!-- Formulario -->
+    <div class="container">
 
-                <div class="card shadow">
-                    <div class="card-header bg-success text-white">
-                        <h4 class="mb-0">Registrar nueva mascota</h4>
-                    </div>
+        <div class="card form-card">
 
-                    <div class="card-body">
+            <div class="card-header">
+                <h2>🐾 Registrar nueva mascota</h2>
+                <p>Completa los datos de tu paciente</p>
+            </div>
 
-                        <form method="POST">
-                            {% csrf_token %}
+            <div class="card-body">
 
-                            {{ form.as_p }}
+                <form method="POST">
+                    {% csrf_token %}
 
-                            <button type="submit" class="btn btn-success w-100">
-                                Registrar mascota
-                            </button>
-                        </form>
+                    {{ form.as_p }}
 
-                    </div>
-                    <a href="{% url 'inicio' %}" class="btn btn-secondary">
-                        Volver al inicio
-                    </a>
-                </div>
+                    <button type="submit"
+                            class="btn btn-registrar w-100">
+                        🐾 Registrar mascota
+                    </button>
+                </form>
+
+                <a href="{% url 'inicio' %}" class="btn-volver">
+                    ← Volver al inicio
+                </a>
 
             </div>
         </div>
-    </div>
 
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
