@@ -38,6 +38,27 @@ class MascotaForm(forms.ModelForm):
             )
 
         return raza
+    
+    def clean_edad(self):
+        edad = self.cleaned_data.get('edad')
+
+        if edad is None:
+            raise forms.ValidationError(
+                "La edad es obligatoria."
+            )
+
+        if edad < 0:
+            raise forms.ValidationError(
+                "La edad no puede ser negativa."
+            )
+
+        if edad > 50:
+            raise forms.ValidationError(
+                "La edad no puede ser mayor a 50 años."
+            )
+
+        return edad
+
 
     def clean_nombre_dueno(self):
         nombre_dueno = self.cleaned_data['nombre_dueno'].strip()
