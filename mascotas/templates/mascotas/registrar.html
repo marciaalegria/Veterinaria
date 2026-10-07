@@ -207,5 +207,23 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const campoEdad = document.getElementById("id_edad");
+
+            if (campoEdad) {
+                campoEdad.setAttribute("maxlength", "2");
+                campoEdad.setAttribute("min", "0");
+                campoEdad.setAttribute("max", "50");
+                campoEdad.setAttribute("inputmode", "numeric");
+
+                campoEdad.addEventListener("input", function () {
+                    this.value = this.value
+                        .replace(/[^0-9]/g, "")
+                        .slice(0, 2);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
