@@ -9,4 +9,5 @@ urlpatterns = [
     path('eliminar/<int:id>/', views.eliminar_mascota, name='eliminar_mascota'),
     path('api/mascotas/', views.api_mascotas, name='api_mascotas'),
     path('api/mascotas/<int:id>/', views.api_mascota_detalle, name='api_mascota_detalle'),
+    path('perro/', views.imagen_perro, name='imagen_perro'),
 ]
